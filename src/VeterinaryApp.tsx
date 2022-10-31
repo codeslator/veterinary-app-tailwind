@@ -1,11 +1,11 @@
-
+import { AppFooter, AppHeader } from "./views/components";
 
 const VeterinaryApp = () => {
   return (
-    <div className="h-screen">
-      <h1 className="text-3xl font-bold underline text-center">
-        Hello world!
-      </h1>
+    <div className="h-screen flex flex-col justify-between">
+      <AppHeader />
+      <main></main>
+      <AppFooter />
     </div>
   )
 }

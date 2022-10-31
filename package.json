@@ -2,7 +2,6 @@
   "name": "veterinary-app-tailwind",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,6 +10,7 @@
   "dependencies": {
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.3.2",
+    "mdi-react": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
