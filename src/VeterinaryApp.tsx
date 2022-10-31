@@ -1,6 +1,6 @@
 
 
-function App() {
+const VeterinaryApp = () => {
   return (
     <h1 className="text-3xl font-bold underline">
       Hello world!
@@ -8,4 +8,4 @@ function App() {
   )
 }
 
-export default App
+export default VeterinaryApp
