@@ -6,7 +6,7 @@ interface FooterProps { }
 
 const AppFooter: FC<FooterProps> = () => {
   return (
-    <Footer>
+    <Footer className="sticky top-[100vh]">
       <div className="w-full">
         <div className="w-full bg-gray-700 py-6 px-4 sm:flex sm:items-center sm:justify-between">
           <Footer.Copyright
