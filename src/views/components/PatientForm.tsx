@@ -68,7 +68,7 @@ const PatientForm: FC<PatientFormProps> = () => {
           <div className="mb-1 block">
             <Label
               htmlFor="discharge_time"
-              value="E-mail"
+              value="Discharge Time"
             />
           </div>
           <TextInput

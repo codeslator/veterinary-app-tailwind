@@ -1,10 +1,17 @@
+import { Card } from 'flowbite-react';
 import { FC } from 'react'
+import PatientItem from './PatientItem';
 
-interface PatientListProps {}
+interface PatientListProps { }
 
 const PatientList: FC<PatientListProps> = () => {
   return (
-    <div>PatientList</div>
+    <div className="md:h-[68vh] md:overflow-y-scroll">
+      <PatientItem />
+      <PatientItem />
+      <PatientItem />
+      <PatientItem />
+    </div>
   );
 };
 
