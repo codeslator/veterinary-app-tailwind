@@ -1,5 +1,5 @@
-import { Card } from 'flowbite-react';
 import { FC } from 'react';
+import { Card } from 'flowbite-react';
 
 interface PatientItemProps {}
 
