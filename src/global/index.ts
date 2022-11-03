@@ -3,5 +3,5 @@ export interface Patient {
   owner_name: string;
   email: string;
   symptom: string;
-  discharge_time: Date;
+  discharge_time: string;
 }

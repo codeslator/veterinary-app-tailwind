@@ -1,6 +1,10 @@
 import { FC, SVGProps } from 'react';
 import { Footer } from 'flowbite-react';
 import Facebook from 'mdi-react/FacebookIcon';
+import Instagram from 'mdi-react/InstagramIcon';
+import WhatsApp from 'mdi-react/WhatsAppIcon';
+import GitHub from 'mdi-react/GitHubIcon';
+import Twitter from 'mdi-react/TwitterIcon';
 
 interface FooterProps { }
 
@@ -13,28 +17,33 @@ const AppFooter: FC<FooterProps> = () => {
             href="#"
             by="CodeslatorDev™"
             year={new Date().getFullYear()}
+            className="text-gray-200"
           />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon
               href="#"
               icon={Facebook as FC<SVGProps<SVGSVGElement>>}
-              className="text-red-500"
+              className="text-white"
             />
             <Footer.Icon
               href="#"
-              icon={Facebook as FC<SVGProps<SVGSVGElement>>}
+              icon={Instagram as FC<SVGProps<SVGSVGElement>>}
+              className="text-white"
             />
             <Footer.Icon
               href="#"
-              icon={Facebook as FC<SVGProps<SVGSVGElement>>}
+              icon={WhatsApp as FC<SVGProps<SVGSVGElement>>}
+              className="text-white"
             />
             <Footer.Icon
               href="#"
-              icon={Facebook as FC<SVGProps<SVGSVGElement>>}
+              icon={GitHub as FC<SVGProps<SVGSVGElement>>}
+              className="text-white"
             />
             <Footer.Icon
               href="#"
-              icon={Facebook as FC<SVGProps<SVGSVGElement>>}
+              icon={Twitter as FC<SVGProps<SVGSVGElement>>}
+              className="text-white"
             />
           </div>
         </div>
