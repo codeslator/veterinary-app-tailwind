@@ -1,12 +1,17 @@
-import { FC, SVGProps } from 'react';
+import { Dispatch, FC, SetStateAction, SVGProps } from 'react';
 import { Label, TextInput, Card, Textarea, Button, Spinner, Alert } from 'flowbite-react';
 import { Formik } from 'formik';
 import AlertIcon from 'mdi-react/AlertIcon';
 import { PATIENT_INITIAL_VALUES, PATIENT_VALIDATION_SCHEMA } from '../validations/patientValidations';
+import { Patient } from '../../global';
 
-interface PatientFormProps { }
+interface PatientFormProps {
+  handlePatient: Dispatch<SetStateAction<Array<Patient>>>;
+}
 
-const PatientForm: FC<PatientFormProps> = () => {
+const PatientForm: FC<PatientFormProps> = ({ handlePatient }) => {
+
+  
 
   const handleSubmit = (values: typeof PATIENT_INITIAL_VALUES) => {
     console.log(values)
