@@ -9,10 +9,9 @@ interface PatientListProps {
 const PatientList: FC<PatientListProps> = ({ patientList }) => {
   return (
     <div className="md:h-[73vh] md:overflow-y-scroll">
-      <PatientItem />
-      <PatientItem />
-      <PatientItem />
-      <PatientItem />
+      {patientList.map((patient: Patient) => (
+        <PatientItem patient={patient} key={patient.id} />
+      ))}
     </div>
   );
 };

@@ -4,4 +4,5 @@ export interface Patient {
   email: string;
   symptom: string;
   discharge_time: string;
+  id?: string;
 }

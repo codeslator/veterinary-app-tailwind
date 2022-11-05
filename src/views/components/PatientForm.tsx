@@ -1,7 +1,6 @@
-import { Dispatch, FC, SetStateAction, SVGProps } from 'react';
-import { Label, TextInput, Card, Textarea, Button, Spinner, Alert } from 'flowbite-react';
+import { Dispatch, FC, SetStateAction } from 'react';
+import { Label, TextInput, Card, Textarea, Button, Spinner } from 'flowbite-react';
 import { Formik } from 'formik';
-import AlertIcon from 'mdi-react/AlertIcon';
 import { PATIENT_INITIAL_VALUES, PATIENT_VALIDATION_SCHEMA } from '../validations/patientValidations';
 import { Patient } from '../../global';
 
@@ -11,17 +10,16 @@ interface PatientFormProps {
 
 const PatientForm: FC<PatientFormProps> = ({ handlePatient }) => {
 
-  
-
-  const handleSubmit = (values: typeof PATIENT_INITIAL_VALUES) => {
-    console.log(values)
+  const handleSubmit = (values: typeof PATIENT_INITIAL_VALUES, setSubmitting: (isSubmitting: boolean) => void) => {
+    handlePatient((prev: Array<Patient>) => [...prev, { ...values, id: Date.now().toString() }]);
+    setSubmitting(false);
   };
 
   return (
     <Card>
       <Formik
         initialValues={PATIENT_INITIAL_VALUES}
-        onSubmit={(values) => handleSubmit(values)}
+        onSubmit={(values, { setSubmitting }) => handleSubmit(values, setSubmitting)}
         validationSchema={PATIENT_VALIDATION_SCHEMA}
       >
         {({
@@ -31,23 +29,9 @@ const PatientForm: FC<PatientFormProps> = ({ handlePatient }) => {
           handleChange,
           handleSubmit,
           isSubmitting,
-          setFieldError,
           isValid
         }) => (
           <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-            {!isValid && (
-              <Alert
-                color="failure"
-                icon={AlertIcon as FC<SVGProps<SVGSVGElement>>}
-              >
-                <span>
-                  <span className="font-medium">
-                    Info alert!{' '}
-                  </span>
-                  Please, check the fields...
-                </span>
-              </Alert>
-            )}
             <div>
               <div className="mb-1 block">
                 <Label
