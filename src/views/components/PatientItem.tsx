@@ -1,13 +1,17 @@
-import { FC } from 'react';
-import { Card } from 'flowbite-react';
+import { Dispatch, FC, SetStateAction } from 'react';
+import { Card, Button } from 'flowbite-react';
 import { Patient } from '../../global';
 
 interface PatientItemProps {
   patient: Patient;
+  handleCurrentPatient: Dispatch<SetStateAction<Patient | undefined>>;
 }
 
-const PatientItem: FC<PatientItemProps> = ({ patient }) => {
+const PatientItem: FC<PatientItemProps> = ({ patient, handleCurrentPatient }) => {
   const { pet_name, owner_name, email, discharge_time, symptom } = patient;
+
+
+
   return (
     <Card className="mb-2">
       <div>
@@ -16,6 +20,17 @@ const PatientItem: FC<PatientItemProps> = ({ patient }) => {
         <p className="mb-1"><span className="font-bold">E-mail: </span>{email}</p>
         <p className="mb-1"><span className="font-bold">Discharge Time: </span>{discharge_time}</p>
         <p className="mb-1"><span className="font-bold">Symptom: </span>{symptom}</p>
+        <div className="flex flex-row justify-between mt-5">
+          <Button
+            className="bg-blue-500 hover:bg-blue-700 focus:ring-blue-600 uppercase px-5"
+            onClick={() => handleCurrentPatient(patient)}
+          >
+            Edit
+          </Button>
+          <Button className="bg-red-500 hover:bg-red-700 focus:ring-red-600 uppercase px-5">
+            Delete
+          </Button>
+        </div>
       </div>
     </Card>
   )

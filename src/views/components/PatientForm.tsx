@@ -1,26 +1,29 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { Label, TextInput, Card, Textarea, Button, Spinner } from 'flowbite-react';
-import { Formik } from 'formik';
+import { Formik, FormikState } from 'formik';
 import { PATIENT_INITIAL_VALUES, PATIENT_VALIDATION_SCHEMA } from '../validations/patientValidations';
 import { Patient } from '../../global';
 
 interface PatientFormProps {
   handlePatient: Dispatch<SetStateAction<Array<Patient>>>;
+  patient: Patient | undefined;
 }
 
-const PatientForm: FC<PatientFormProps> = ({ handlePatient }) => {
+const PatientForm: FC<PatientFormProps> = ({ handlePatient, patient }) => {
 
-  const handleSubmit = (values: typeof PATIENT_INITIAL_VALUES, setSubmitting: (isSubmitting: boolean) => void) => {
+  const handleSubmit = (values: typeof PATIENT_INITIAL_VALUES, setSubmitting: (isSubmitting: boolean) => void, resetForm: (nextState?: Partial<FormikState<Patient>> | undefined) => void) => {
     handlePatient((prev: Array<Patient>) => [...prev, { ...values, id: Date.now().toString() }]);
     setSubmitting(false);
+    resetForm(PATIENT_INITIAL_VALUES as Partial<FormikState<Patient>>);
   };
 
   return (
     <Card>
       <Formik
-        initialValues={PATIENT_INITIAL_VALUES}
-        onSubmit={(values, { setSubmitting }) => handleSubmit(values, setSubmitting)}
+        initialValues={patient ? patient : PATIENT_INITIAL_VALUES}
+        onSubmit={(values, { setSubmitting, resetForm }) => handleSubmit(values, setSubmitting, resetForm)}
         validationSchema={PATIENT_VALIDATION_SCHEMA}
+        enableReinitialize        
       >
         {({
           values,
@@ -124,7 +127,7 @@ const PatientForm: FC<PatientFormProps> = ({ handlePatient }) => {
                     />
                   </div>
                 )}
-                {isSubmitting ? 'Loading...' : 'Add Patient'}
+                {isSubmitting ? 'Loading...' : (patient?.id) ? 'Update Patient' : 'Add Patient'}
               </Button>
             </div>
           </form>

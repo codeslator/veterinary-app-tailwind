@@ -17,7 +17,6 @@ const AppFooter: FC<FooterProps> = () => {
             href="#"
             by="CodeslatorDev™"
             year={new Date().getFullYear()}
-            className="text-gray-200"
           />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon
