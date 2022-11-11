@@ -5,12 +5,18 @@ import { Patient } from '../../global';
 interface PatientItemProps {
   patient: Patient;
   handleCurrentPatient: Dispatch<SetStateAction<Patient | undefined>>;
+  deletePatient: (id: string) => void;
 }
 
-const PatientItem: FC<PatientItemProps> = ({ patient, handleCurrentPatient }) => {
-  const { pet_name, owner_name, email, discharge_time, symptom } = patient;
+const PatientItem: FC<PatientItemProps> = ({ patient, handleCurrentPatient, deletePatient }) => {
+  const { pet_name, owner_name, email, discharge_time, symptom, id } = patient;
 
-
+  const handleDelete = () => {
+    const response = confirm('Are you sure you want to delete this record?');
+    if (response) {
+      deletePatient(id);
+    }
+  };
 
   return (
     <Card className="mb-2">
@@ -27,7 +33,10 @@ const PatientItem: FC<PatientItemProps> = ({ patient, handleCurrentPatient }) =>
           >
             Edit
           </Button>
-          <Button className="bg-red-500 hover:bg-red-700 focus:ring-red-600 uppercase px-5">
+          <Button
+            className="bg-red-500 hover:bg-red-700 focus:ring-red-600 uppercase px-5"
+            onClick={handleDelete}
+          >
             Delete
           </Button>
         </div>

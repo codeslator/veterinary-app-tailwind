@@ -5,25 +5,32 @@ import { PATIENT_INITIAL_VALUES, PATIENT_VALIDATION_SCHEMA } from '../validation
 import { Patient } from '../../global';
 
 interface PatientFormProps {
-  handlePatient: Dispatch<SetStateAction<Array<Patient>>>;
-  patient: Patient | undefined;
+  handlePatients: Dispatch<SetStateAction<Array<Patient>>>;
+  currentPatient: Patient | undefined;
+  handleCurrentPatient: Dispatch<SetStateAction<Patient | undefined>>;
 }
 
-const PatientForm: FC<PatientFormProps> = ({ handlePatient, patient }) => {
+const PatientForm: FC<PatientFormProps> = ({ handlePatients, currentPatient, handleCurrentPatient }) => {
 
   const handleSubmit = (values: typeof PATIENT_INITIAL_VALUES, setSubmitting: (isSubmitting: boolean) => void, resetForm: (nextState?: Partial<FormikState<Patient>> | undefined) => void) => {
-    handlePatient((prev: Array<Patient>) => [...prev, { ...values, id: Date.now().toString() }]);
+    if (currentPatient?.id) {
+      handlePatients((prev: Array<Patient>) => prev.map((patient: Patient) => ((currentPatient.id === patient.id) ? values : patient)));
+      handleCurrentPatient({ ...PATIENT_INITIAL_VALUES } as Patient);
+    }
+    else {
+      handlePatients((prev: Array<Patient>) => [...prev, { ...values, id: Date.now().toString() }]);
+      resetForm({ ...PATIENT_INITIAL_VALUES } as Partial<FormikState<Patient>>);
+    }
     setSubmitting(false);
-    resetForm(PATIENT_INITIAL_VALUES as Partial<FormikState<Patient>>);
   };
 
   return (
     <Card>
       <Formik
-        initialValues={patient ? patient : PATIENT_INITIAL_VALUES}
+        initialValues={currentPatient ? currentPatient : PATIENT_INITIAL_VALUES}
         onSubmit={(values, { setSubmitting, resetForm }) => handleSubmit(values, setSubmitting, resetForm)}
         validationSchema={PATIENT_VALIDATION_SCHEMA}
-        enableReinitialize        
+        enableReinitialize
       >
         {({
           values,
@@ -127,7 +134,7 @@ const PatientForm: FC<PatientFormProps> = ({ handlePatient, patient }) => {
                     />
                   </div>
                 )}
-                {isSubmitting ? 'Loading...' : (patient?.id) ? 'Update Patient' : 'Add Patient'}
+                {isSubmitting ? 'Loading...' : (currentPatient?.id) ? 'Update Patient' : 'Add Patient'}
               </Button>
             </div>
           </form>

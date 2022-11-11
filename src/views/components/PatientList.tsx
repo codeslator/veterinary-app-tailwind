@@ -5,9 +5,10 @@ import PatientItem from './PatientItem';
 interface PatientListProps {
   patientList: Array<Patient>;
   handleCurrentPatient: Dispatch<SetStateAction<Patient | undefined>>;
+  deletePatient: (id: string) => void;
 }
 
-const PatientList: FC<PatientListProps> = ({ patientList, handleCurrentPatient }) => {
+const PatientList: FC<PatientListProps> = ({ patientList, handleCurrentPatient, deletePatient }) => {
   return (
     <>
       {(patientList.length !== 0) ? (
@@ -16,6 +17,7 @@ const PatientList: FC<PatientListProps> = ({ patientList, handleCurrentPatient }
             <PatientItem
               patient={patient} key={patient.id}
               handleCurrentPatient={handleCurrentPatient}
+              deletePatient={deletePatient}
             />
           ))}
         </div>
